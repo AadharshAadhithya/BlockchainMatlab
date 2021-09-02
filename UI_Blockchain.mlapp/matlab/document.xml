@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[classdef UI_Blockchain < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                   matlab.ui.Figure
+        TabGroup                   matlab.ui.container.TabGroup
+        BlockChainTab              matlab.ui.container.Tab
+        BlockChainSimulationLabel  matlab.ui.control.Label
+        Image                      matlab.ui.control.Image
+        DataEditFieldLabel         matlab.ui.control.Label
+        DataEditField              matlab.ui.control.EditField
+        MineButton                 matlab.ui.control.Button
+        UITable                    matlab.ui.control.Table
+        MinerateEditFieldLabel     matlab.ui.control.Label
+        MinerateEditField          matlab.ui.control.EditField
+        StartButton                matlab.ui.control.Button
+        CENLabel                   matlab.ui.control.Label
+        PeersTab                   matlab.ui.container.Tab
+        UITable2                   matlab.ui.control.Table
+        EditField_2                matlab.ui.control.EditField
+        AddPeerButton              matlab.ui.control.Button
+        CENLabel_2                 matlab.ui.control.Label
+        AIE24Label                 matlab.ui.control.Label
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Position = [100 100 640 480];
+            app.UIFigure.Name = 'MATLAB App';
+
+            % Create TabGroup
+            app.TabGroup = uitabgroup(app.UIFigure);
+            app.TabGroup.Position = [17 23 608 439];
+
+            % Create BlockChainTab
+            app.BlockChainTab = uitab(app.TabGroup);
+            app.BlockChainTab.Title = 'BlockChain';
+            app.BlockChainTab.BackgroundColor = [0.8039 0.902 0.6118];
+
+            % Create BlockChainSimulationLabel
+            app.BlockChainSimulationLabel = uilabel(app.BlockChainTab);
+            app.BlockChainSimulationLabel.FontName = 'Rockwell';
+            app.BlockChainSimulationLabel.FontSize = 20;
+            app.BlockChainSimulationLabel.Position = [176 371 256 26];
+            app.BlockChainSimulationLabel.Text = '      BlockChain Simulation';
+
+            % Create Image
+            app.Image = uiimage(app.BlockChainTab);
+            app.Image.Position = [13 273 150 87];
+            app.Image.ImageSource = '—Pngtree—2.5d blockchain matrix_4035019.png';
+
+            % Create DataEditFieldLabel
+            app.DataEditFieldLabel = uilabel(app.BlockChainTab);
+            app.DataEditFieldLabel.HorizontalAlignment = 'right';
+            app.DataEditFieldLabel.FontName = 'Rockwell';
+            app.DataEditFieldLabel.FontSize = 16;
+            app.DataEditFieldLabel.Position = [188 315 39 22];
+            app.DataEditFieldLabel.Text = 'Data';
+
+            % Create DataEditField
+            app.DataEditField = uieditfield(app.BlockChainTab, 'text');
+            app.DataEditField.Position = [242 315 108 22];
+
+            % Create MineButton
+            app.MineButton = uibutton(app.BlockChainTab, 'push');
+            app.MineButton.BackgroundColor = [0.8 0.902 0.6118];
+            app.MineButton.FontName = 'Rockwell';
+            app.MineButton.FontSize = 15;
+            app.MineButton.Position = [242 273 108 30];
+            app.MineButton.Text = 'Mine';
+
+            % Create UITable
+            app.UITable = uitable(app.BlockChainTab);
+            app.UITable.ColumnName = {'Timestate'; 'Data'; 'Nounce'; 'Miner'};
+            app.UITable.RowName = {};
+            app.UITable.Position = [24 39 559 185];
+
+            % Create MinerateEditFieldLabel
+            app.MinerateEditFieldLabel = uilabel(app.BlockChainTab);
+            app.MinerateEditFieldLabel.HorizontalAlignment = 'right';
+            app.MinerateEditFieldLabel.FontName = 'Rockwell';
+            app.MinerateEditFieldLabel.FontSize = 16;
+            app.MinerateEditFieldLabel.Position = [397 315 71 22];
+            app.MinerateEditFieldLabel.Text = 'Minerate';
+
+            % Create MinerateEditField
+            app.MinerateEditField = uieditfield(app.BlockChainTab, 'text');
+            app.MinerateEditField.Position = [483 315 100 22];
+
+            % Create StartButton
+            app.StartButton = uibutton(app.BlockChainTab, 'push');
+            app.StartButton.BackgroundColor = [0.8 0.902 0.6118];
+            app.StartButton.FontName = 'Rockwell';
+            app.StartButton.FontSize = 16;
+            app.StartButton.Position = [440 235 100 29];
+            app.StartButton.Text = 'Start';
+
+            % Create CENLabel
+            app.CENLabel = uilabel(app.BlockChainTab);
+            app.CENLabel.HorizontalAlignment = 'center';
+            app.CENLabel.FontName = 'Rockwell';
+            app.CENLabel.Position = [271 1 49 23];
+            app.CENLabel.Text = '©CEN';
+
+            % Create PeersTab
+            app.PeersTab = uitab(app.TabGroup);
+            app.PeersTab.Title = 'Peers';
+            app.PeersTab.BackgroundColor = [0.8 0.902 0.6118];
+
+            % Create UITable2
+            app.UITable2 = uitable(app.PeersTab);
+            app.UITable2.ColumnName = {'Peer'; 'Status'};
+            app.UITable2.RowName = {};
+            app.UITable2.FontName = 'Rockwell';
+            app.UITable2.Position = [24 235 571 162];
+
+            % Create EditField_2
+            app.EditField_2 = uieditfield(app.PeersTab, 'text');
+            app.EditField_2.Position = [162 160 305 29];
+
+            % Create AddPeerButton
+            app.AddPeerButton = uibutton(app.PeersTab, 'push');
+            app.AddPeerButton.FontName = 'Rockwell';
+            app.AddPeerButton.FontSize = 14;
+            app.AddPeerButton.Position = [260 118 100 26];
+            app.AddPeerButton.Text = 'Add Peer';
+
+            % Create CENLabel_2
+            app.CENLabel_2 = uilabel(app.PeersTab);
+            app.CENLabel_2.HorizontalAlignment = 'center';
+            app.CENLabel_2.FontName = 'Rockwell';
+            app.CENLabel_2.Position = [271 1 49 23];
+            app.CENLabel_2.Text = '©CEN';
+
+            % Create AIE24Label
+            app.AIE24Label = uilabel(app.UIFigure);
+            app.AIE24Label.HorizontalAlignment = 'center';
+            app.AIE24Label.FontName = 'Rockwell';
+            app.AIE24Label.FontSize = 16;
+            app.AIE24Label.FontColor = [0.8 0.8 0.8];
+            app.AIE24Label.Position = [259 2 108 22];
+            app.AIE24Label.Text = 'AIE''24';
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = UI_Blockchain
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end]]></w:t></w:r></w:p></w:body></w:document>
